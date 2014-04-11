@@ -69,8 +69,10 @@ var defaultDB = '0';
 if(config.redis) {
 config.redis.database = config.redis.database || defaultDB;
 
-if (process.env.REDISTOGO_URL || process.env.REDIS_URL) {
-    var rtg   = require("url").parse(process.env.REDISTOGO_URL || process.env.REDIS_URL);
+// Note that this is a hack.  REDIS_PORT is an environment variable that is set by Docker, and Docker does not know REDIS_PORT until runtime.
+// Various tools (ahem, supervisor) do not allow setting an ENV to another ENV, so these need to be doubled up here.  Ick.
+if (process.env.REDISTOGO_URL || process.env.REDIS_URL || process.env.REDIS_PORT) {
+    var rtg   = require("url").parse(process.env.REDISTOGO_URL || process.env.REDIS_URL || process.env.REDIS_PORT);
     config.redis.host = rtg.hostname;
     config.redis.port = rtg.port;
     config.redis.password = rtg.auth && rtg.auth.split(":")[1] ? rtg.auth.split(":")[1] : '';
