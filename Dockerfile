@@ -1,10 +1,13 @@
 # Dockerfile for IODocs
 #
-# Build Instructions
-# docker build --rm -t adjs/iodocs /home/core/share/code/adjs/iodocs
-#
-# Run Instructions
+# Run Instructions - DETACHED
 # docker run --name iodocs --link redis:redis -d adjs/iodocs
+#
+# Run Instructions - INTERACTIVE
+# docker run --name iodocs --link redis:redis --rm -i -t adjs/iodocs /bin/bash
+#
+# Build Instructions
+# docker build -t adjs/iodocs --rm /home/core/share/code/adjs/iodocs
 
 # Pull from the latest NodeJS release from Ad.js
 FROM adjs/nodejs
@@ -30,11 +33,14 @@ RUN cp config.json.sample config.json
 # Configure to run on a socket
 RUN sed -i 's#"port" : 3000,#"port" : 3000,\n    "socket" : "/tmp/iodocs.sock",#' config.json
 
-# Share the socket
+# Make the owner of these files www-data (which will be running the node process)
+RUN chown -R www-data:www-data ../iodocs
+
+# Share the socket and set perms
 VOLUME /tmp
 
-# Add Nginx integration if needed
-RUN mkdir -p /etc/nginx/sites-enabled
+# Allow sockets created there to be used by others
+RUN chmod 0777 /tmp
 
 # Share the config directory
 VOLUME /etc/nginx/sites-enabled
@@ -48,4 +54,6 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Expose the port (not needed if using socket)
 # EXPOSE 3000
 
-CMD /usr/bin/supervisord
+RUN chmod 0777 /tmp
+
+CMD /usr/bin/supervisord -u www-data
