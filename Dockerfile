@@ -36,11 +36,12 @@ RUN sed -i 's#"port" : 3000,#"port" : 3000,\n    "socket" : "/tmp/iodocs.sock",#
 # Make the owner of these files www-data (which will be running the node process)
 RUN chown -R www-data:www-data ../iodocs
 
-# Share the socket and set perms
-VOLUME /tmp
-
 # Allow sockets created there to be used by others
 RUN chmod 0777 /tmp
+RUN su www-data -c 'echo 1 > /tmp/test.txt'
+
+# Share the socket and set perms
+VOLUME /tmp
 
 # Share the config directory
 VOLUME /etc/nginx/sites-enabled
