@@ -1,4 +1,13 @@
 {
+    "adjs": {
+      "name": "Ad.js v1 API",
+      "protocol": "http",
+      "baseURL": "api.adjs.io",
+      "publicPath": "/v1",
+      "headers" : {},
+      "auth": "key",
+      "keyParam": "api-token"
+    },
     "klout": {
         "name": "Klout v2 API",
         "protocol": "http",
