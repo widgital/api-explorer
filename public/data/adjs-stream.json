@@ -1,0 +1,37 @@
+{
+  "endpoints":[
+    {
+      "name":"Events",
+      "methods":[
+        {
+          "MethodName":"Ad Request",
+          "Synopsis":"Event shows that an ad has been requested",
+          "HTTPMethod":"GET",
+          "URI":"/req",
+          "RequiresOAuth":"N",
+          "parameters":[
+            { "Name":"t1",   "Required":"N", "Default":"", "Type":"string",  "Description":"The number of milliseconds from the time the script loads until the time this api is called" },
+            { "Name":"view", "Required":"N", "Default":"", "Type":"boolean", "Description":"Whether or not the ad was in view at the time of request" }
+          ]
+        },
+        {
+          "MethodName":"Show User",
+          "Synopsis":"This method allows you to retrieve the user object associated with the given API token",
+          "HTTPMethod":"GET",
+          "URI":"/users/:userid",
+          "RequiresOAuth":"N",
+          "parameters":[
+            {
+              "Name":"userid",
+              "Required":"Y",
+              "Default":"",
+              "Type":"string",
+              "Description":"The user ID"
+            }
+          ]
+        }
+        //
+      ]
+    }
+  ]
+}
