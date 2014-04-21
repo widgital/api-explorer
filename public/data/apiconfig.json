@@ -1,5 +1,5 @@
 {
-    "adjs": {
+    "adjs-api": {
       "name": "Ad.js v1 API",
       "protocol": "http",
       "baseURL": "api.adjs.io",
@@ -7,6 +7,13 @@
       "headers" : {},
       "auth": "key",
       "keyParam": "api-token"
+    },
+    "adjs-stream": {
+      "name": "Ad.js Streaming API",
+      "protocol": "http",
+      "baseURL": "stream.adjs.io",
+      "publicPath": "/v1",
+      "headers" : {}
     },
     "klout": {
         "name": "Klout v2 API",
