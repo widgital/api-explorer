@@ -10,13 +10,27 @@
           "URI":"/req",
           "RequiresOAuth":"N",
           "parameters":[
-            { "Name":"req_id", "Required":"N", "Default":"", "Type":"string",  "Description":"The ID of the ad request.  If not provided, one will be generated" },
-            { "Name":"req_delay_ms", "Required":"N", "Default":"", "Type":"string",  "Description":"The number of milliseconds from when the script tried to request to when it was able to request (e.g. if the client was offline for some period of time)" },
-            { "Name":"req_t", "Required":"N", "Default":"", "Type":"string",  "Description":"The number of milliseconds before the ad request was requested" },
-            { "Name":"req_api_ms", "Required":"N", "Default":"", "Type":"string",  "Description":"The number of ms it took for the request API to be processed from the client" },
-            { "Name":"req_view", "Required":"N", "Default":"", "Type":"boolean", "Description":"Whether or not the request was in view at request time" },
-            { "Name":"req_view_pix", "Required":"N", "Default":"", "Type":"string", "Description":"Number of pixels of the ad that was in view at request time" },
-            { "Name":"req_url_blind", "Required":"N", "Default":"", "Type":"boolean", "Description":"Whether we could directly see the URL from the web page" },
+            { "Name":"client_id", "Required":"N", "Default":"337b97e5-7104-4f6e-b3e8-11b81ef47cb3", "Type":"string",  "Description":"The ID of the client.  This is tied to the org" },
+            { "Name":"req_id", "Required":"N", "Default":"fb9cf1cc-9e5a-42a5-8179-9ef20ddc9ef8", "Type":"string",  "Description":"The ID of the ad request.  If not provided, one will be generated" },
+//            { "Name":"req_delay_ms", "Required":"N", "Default":"0", "Type":"string",  "Description":"The number of milliseconds from when the script tried to request to when it was able to request (e.g. if the client was offline for some period of time)" },
+            { "Name":"req_t", "Required":"N", "Default":"46", "Type":"string",  "Description":"The number of milliseconds before the ad request was requested" },
+            { "Name":"req_api_ms", "Required":"N", "Default":"165", "Type":"string",  "Description":"The number of ms it took for the request API to be processed from the client" },
+            { "Name":"req_view", "Required":"N", "Default":"t", "Type":"boolean", "Description":"Whether or not the request was in view at request time" },
+            { "Name":"req_view_pix", "Required":"N", "Default":"60000", "Type":"string", "Description":"Number of pixels of the ad that was in view at request time" },
+            { "Name":"req_url_blind", "Required":"N", "Default":"n", "Type":"boolean", "Description":"Whether we could directly see the URL from the web page" },
+            { "Name":"load_t", "Required":"N", "Default":"402", "Type":"string",  "Description":"The number of milliseconds before the ad load event was fired" },
+            { "Name":"load_chain", "Required":"N", "Default":"7", "Type":"string",  "Description":"Total number frames in the ad chain" },
+            { "Name":"load_pos", "Required":"N", "Default":"2", "Type":"string",  "Description":"Our position in the ad chain" },
+            { "Name":"load_n", "Required":"N", "Default":"", "Type":"string",  "Description":"Number of previous ads (including this one) that have been served in this slot" },
+            { "Name":"view_t", "Required":"N", "Default":"", "Type":"string",  "Description":"The number of milliseconds before the ad view event was fired" },
+            { "Name":"view_eng", "Required":"N", "Default":"", "Type":"string",  "Description":"Whether the user was engaged with the web page on which the ad was loaded" },
+            { "Name":"view_dur", "Required":"N", "Default":"", "Type":"string",  "Description":"Number of milliseconds that the ad was in view" },
+            { "Name":"view_pix", "Required":"N", "Default":"", "Type":"string",  "Description":"Ad surface area - number of pixels (on average) that was in view (just during the first second)" },
+            { "Name":"view_pix_max", "Required":"N", "Default":"", "Type":"string",  "Description":"Ad surface area - number of pixels (max) that was in view" },
+            { "Name":"view_meas", "Required":"N", "Default":"", "Type":"string",  "Description":"Whether the ad viewability could be measured" },
+            { "Name":"view_meas_type", "Required":"N", "Default":"", "Type":"string",  "Description":"The type of measurement used (geometric, flashpixel, etc)" },
+            { "Name":"clk_t", "Required":"N", "Default":"", "Type":"string",  "Description":"The number of milliseconds before the ad click event was fired" },
+            { "Name":"unl_t", "Required":"N", "Default":"", "Type":"string",  "Description":"The number of milliseconds before the ad unload event was fired" },
             { "Name":"campaign_id", "Required":"N", "Default":"", "Type":"string", "Description":"The ID of the campaign" },
             { "Name":"ad_id", "Required":"N", "Default":"", "Type":"string", "Description":"The ID of the ad creative" },
             { "Name":"label", "Required":"N", "Default":"", "Type":"string", "Description":"User defined label that helps classify this ad request" },
@@ -57,32 +71,29 @@
             { "Name":"vp_x", "Required":"N", "Default":"", "Type":"string", "Description":"The X position of the browser window at the time of the request" },
             { "Name":"vp_y", "Required":"N", "Default":"", "Type":"string", "Description":"The Y position of the ad slot at the time of the request" },
             { "Name":"vp_w", "Required":"N", "Default":"", "Type":"string", "Description":"The width of the browser window" },
-            { "Name":"vp_h", "Required":"N", "Default":"", "Type":"string", "Description":"The height of the browser window" }
+            { "Name":"vp_h", "Required":"N", "Default":"", "Type":"string", "Description":"The height of the browser window" },
+            { "Name":"url", "Required":"N", "Default":"", "Type":"string", "Description":"The raw URL from the highest frame in the page" },
+            { "Name":"ref", "Required":"N", "Default":"", "Type":"string", "Description":"The height of the browser window" },
+            { "Name":"v_js", "Required":"N", "Default":"", "Type":"string", "Description":"The height of the browser window" }
           ]
         },
-        {
-          "MethodName":"Show User",
-          "Synopsis":"This method allows you to retrieve the user object associated with the given API token",
-          "HTTPMethod":"GET",
-          "URI":"/users/:userid",
-          "RequiresOAuth":"N",
-          "parameters":[
-            {
-              "Name":"userid",
-              "Required":"Y",
-              "Default":"",
-              "Type":"string",
-              "Description":"The user ID"
-            }
-          ]
-        }
         /* JSON Output:
         {
           "req_id" : "abcd-ef12-3456-7890",
-          "user_id" : "0123-4567-89ab-cdef",
-          "site_id" : "2345-6789-abcd-ef01",
+          "v_api" : "0.0.1",
+          "q" : "0.3453",
         }
         */
+        {
+          "MethodName":"Ad Request",
+          "Synopsis":"Event shows that an ad has been requested",
+          "HTTPMethod":"GET",
+          "URI":"/req/:req_id",
+          "RequiresOAuth":"N",
+          "parameters":[
+            { "Name":"req_id", "Required":"N", "Default":"", "Type":"string",  "Description":"The ID of the ad request.  If not provided, one will be generated" }
+          ]
+        }
       ]
     }
   ]
