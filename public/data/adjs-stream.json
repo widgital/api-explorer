@@ -91,7 +91,7 @@
           "URI":"/req/:req_id",
           "RequiresOAuth":"N",
           "parameters":[
-            { "Name":"req_id", "Required":"N", "Default":"", "Type":"string",  "Description":"The ID of the ad request.  If not provided, one will be generated" }
+            { "Name":"req_id", "Required":"N", "Default":"fb9cf1cc-9e5a-42a5-8179-9ef20ddc9ef8", "Type":"string",  "Description":"The ID of the ad request.  If not provided, one will be generated" }
           ]
         }
       ]
