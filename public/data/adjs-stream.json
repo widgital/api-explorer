@@ -7,7 +7,7 @@
           "MethodName":"Page Request",
           "Synopsis":"Event that is called when a page has been requested",
           "HTTPMethod":"POST",
-          "URI":"/req",
+          "URI":"/page",
           "RequiresOAuth":"N",
           "parameters":[
             { "Name":"client_id", "Required":"N", "Default":"337b97e5-7104-4f6e-b3e8-11b81ef47cb3", "Type":"string",  "Description":"The ID of the client.  This is tied to the org" },
