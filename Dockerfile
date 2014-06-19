@@ -16,6 +16,7 @@ FROM adjs/nodejs
 MAINTAINER Scott Switzer <scott@switzer.org>
 
 # Install Git in order to pull down our code
+RUN apt-get -y update
 RUN apt-get -y install git-core
 
 # Get the source code and install
